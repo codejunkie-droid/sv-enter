@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SV Enterprises | Vehicle RTO Lookup</title>
+  <meta name="description" content="Instantly check vehicle details, including owner name, by entering the license plate number.">
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="stylesheet" href="css/sv-custom.css">
+  <style>
+    /* Custom styling for the lookup page */
+    .sv-form-group {
+      margin-bottom: 1.5rem;
+    }
+    .sv-form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--sv-color-grey-300);
+      border-radius: var(--sv-border-radius);
+      font-size: 1rem;
+    }
+    .sv-lookup-result {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border: 1px solid var(--sv-color-primary);
+      border-radius: var(--sv-border-radius);
+      background-color: var(--sv-color-white); 
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sv-result-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--sv-color-primary);
+      border-bottom: 2px solid var(--sv-color-primary-light);
+      padding-bottom: 0.5rem;
+    }
+    .sv-result-item {
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--sv-color-grey-200);
+    }
+    .sv-result-item:last-child {
+      border-bottom: none;
+    }
+    /* Ensure the key stands out */
+    .sv-result-item strong {
+      display: inline-block;
+      min-width: 150px;
+      font-weight: 600;
+    }
+    .sv-error {
+        color: #e74c3c; /* A standard error red */
+        font-weight: bold;
+    }
+  </style>
+</head>
+<body class="sv-page">
+  <header class="sv-header">
+    <div class="sv-container sv-header__inner">
+      <a class="sv-logo" href="index.html">SV Enterprises</a>
+      <nav>
+        <ul class="sv-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="benefits.html">Benefits</a></li>
+          <li><a href="claims.html">Claims</a></li>
+          <li><a class="is-active" href="rto-check.html" aria-current="page">RTO Check</a></li>
+          <li><a href="contact-us.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="sv-header__cta">
+        <a class="sv-btn sv-btn--ghost" href="mailto:Vijaysvinsurance1@gmail.com">Email Us</a>
+        <a class="sv-btn sv-btn--primary" href="tel:+919380858219">Call 93808 58219</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="sv-section">
+      <div class="sv-container">
+        <div class="sv-hero" style="background: var(--sv-hero-overlay), url('images/hero-motor.jpg') center/cover no-repeat;">
+          <div class="sv-hero__content sv-fade-up">
+            <span class="sv-pill">Quick Vehicle Check</span>
+            <h1 class="sv-hero__title">Instantly Check Vehicle RTO Details</h1>
+            <p class="sv-hero__text">Enter any Indian vehicle registration number to get instant details about the vehicle owner and registration data.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sv-section sv-section--compact">
+        <div class="sv-container">
+            <div class="sv-hero__content sv-fade-up" style="text-align:center;">
+                <h2 class="sv-title">Vehicle Registration Number Lookup</h2>
+                <p class="sv-subtitle">Enter the vehicle number (e.g., KA01AB1234) to retrieve registration details.</p>
+            </div>
+            
+            <div class="sv-grid-2">
+                <div>
+                    <form id="vehicleLookupForm" class="sv-card sv-fade-up">
+                        <div class="sv-form-group">
+                            <label for="vehicle_no">Vehicle Registration Number</label>
+                            <input type="text" id="vehicle_no" name="vehicle_no" class="sv-form-control" placeholder="e.g., KA01AB1234" required>
+                        </div>
+                        <button type="submit" class="sv-btn sv-btn--primary">Search Details</button>
+                        <p id="loadingMessage" style="display:none; margin-top: 1rem;">Loading vehicle data... Please wait.</p>
+                        <p id="errorMessage" class="sv-error" style="display:none; margin-top: 1rem;"></p>
+                    </form>
+                </div>
+
+                <div>
+                    <div id="resultsContainer" class="sv-lookup-result sv-fade-up" style="display:none;">
+                        <h3 class="sv-result-title">Vehicle Details</h3>
+                        <div id="ownerNameDisplay" class="sv-result-item"></div>
+                        <div id="otherInfoDisplay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  </main>
+
+  <footer class="sv-footer">
+    <div class="sv-container">
+      <div class="sv-footer__top">
+        <div>
+          <div class="sv-footer__brand">SV Enterprises</div>
+          <p>Motor &amp; Vehicle Insurance Specialists safeguarding ambitions across Karnataka with agile advisory and claims excellence.</p>
+          <div class="sv-social">
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Twitter">X</a>
+            <a href="#" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul class="sv-footer__list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="benefits.html">Benefits</a></li>
+            <li><a href="claims.html">Claims</a></li>
+            <li><a href="rto-check.html">RTO Check</a></li>
+            <li><a href="contact-us.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul class="sv-footer__list">
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul class="sv-footer__list">
+            <li>SV Enterprises</li>
+            <li>Rajajinagar, Bangalore</li>
+            <li><a href="tel:+919380858219">+91 93808 58219</a> / <a href="tel:+917411812788">74118 12788</a></li>
+            <li><a href="mailto:Vijaysvinsurance1@gmail.com">Vijaysvinsurance1@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sv-footer__bottom">
+        © 2025 SV Enterprises. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('vehicleLookupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const vehicleNoInput = document.getElementById('vehicle_no');
+      const resultsContainer = document.getElementById('resultsContainer');
+      const ownerNameDisplay = document.getElementById('ownerNameDisplay');
+      const otherInfoDisplay = document.getElementById('otherInfoDisplay');
+      const loadingMessage = document.getElementById('loadingMessage');
+      const errorMessage = document.getElementById('errorMessage');
+
+      // Get the vehicle number, convert to uppercase, trim, and safely URL-encode it
+      const rawVehicleNo = vehicleNoInput.value.trim().toUpperCase();
+      const encodedVehicleNo = encodeURIComponent(rawVehicleNo);
+      const apiEndpoint = `https://vehicle.rahulrk98503.workers.dev/?vehicle_no=${encodedVehicleNo}`;
+
+      // Reset previous states and show loading
+      resultsContainer.style.display = 'none';
+      errorMessage.style.display = 'none';
+      ownerNameDisplay.innerHTML = '';
+      otherInfoDisplay.innerHTML = '';
+      loadingMessage.style.display = 'block';
+      vehicleNoInput.setAttribute('disabled', 'true');
+      document.querySelector('button[type="submit"]').setAttribute('disabled', 'true');
+
+
+      fetch(apiEndpoint)
+        .then(response => {
+          loadingMessage.style.display = 'none';
+          vehicleNoInput.removeAttribute('disabled');
+          document.querySelector('button[type="submit"]').removeAttribute('disabled');
+
+          if (!response.ok) {
+            // Attempt to read JSON error message if present, otherwise throw generic error
+            return response.json().catch(() => {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            });
+          }
+          return response.json();
+        })
+        .then(data => {
+            if (data && data.error) {
+                errorMessage.textContent = `Error: ${data.error}`;
+                errorMessage.style.display = 'block';
+                return;
+            }
+            if (!data || Object.keys(data).length === 0) {
+                errorMessage.textContent = 'Error: No vehicle data found for this number.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // --- Process and Display Data ---
+            
+            // 1. Prioritize and display Owner Name
+            const ownerName = data.owner_name || 'N/A';
+            ownerNameDisplay.innerHTML = `<strong>Vehicle Owner:</strong> <span style="font-size: 1.1em; color: var(--sv-color-dark);">${ownerName}</span>`;
+            
+            // 2. Prepare other important information (excluding owner_name)
+            let otherHtml = '';
+            
+            // Define a preferred order for display
+            const displayOrder = [
+                { key: 'registration_number', label: 'Registration No.' },
+                { key: 'make', label: 'Make' },
+                { key: 'model', label: 'Model' },
+                { key: 'fuel_type', label: 'Fuel Type' },
+                { key: 'rc_status', label: 'RC Status' },
+                { key: 'registration_date', label: 'Registration Date' },
+                { key: 'insurance_upto', label: 'Insurance Upto' },
+                { key: 'puc_upto', label: 'PUC Upto' },
+                { key: 'engine_number', label: 'Engine No.' },
+                { key: 'chassis_number', label: 'Chassis No.' },
+                { key: 'rto_office', label: 'RTO Office' }
+            ];
+            
+            // Object to track keys already processed (owner_name is pre-processed)
+            const processedKeys = new Set(['owner_name', 'error', 'vehicle_no']);
+
+            // Add fields in the preferred order
+            displayOrder.forEach(field => {
+                if (data[field.key]) {
+                    otherHtml += `<div class="sv-result-item"><strong>${field.label}:</strong> ${data[field.key]}</div>`;
+                    processedKeys.add(field.key);
+                }
+            });
+
+            // Add any remaining fields that were in the API response but not in the displayOrder
+            for (const key in data) {
+                if (data.hasOwnProperty(key) && !processedKeys.has(key) && data[key] !== null && data[key] !== undefined) {
+                    // Simple title-case for keys not in the preferred map
+                    const label = key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                    otherHtml += `<div class="sv-result-item"><strong>${label}:</strong> ${data[key]}</div>`;
+                    processedKeys.add(key);
+                }
+            }
+            
+            otherInfoDisplay.innerHTML = otherHtml;
+            resultsContainer.style.display = 'block';
+
+        })
+        .catch(error => {
+            loadingMessage.style.display = 'none';
+            vehicleNoInput.removeAttribute('disabled');
+            document.querySelector('button[type="submit"]').removeAttribute('disabled');
+            console.error('Lookup failed:', error);
+            
+            let message = error.message;
+
+            // This specific error often indicates a CORS issue (security policy preventing fetch)
+            if (message.includes('Failed to fetch')) {
+                message = "The request failed to reach the server. This is often caused by a **CORS policy** restricting access. If the issue persists, the API owner will need to adjust their server settings, or you may need to route the request through a server-side proxy.";
+            }
+
+            errorMessage.textContent = `Vehicle Data Lookup Failed: ${message}`;
+            errorMessage.style.display = 'block';
+        });
+    });
+  </script>
+</body>
+</html>
