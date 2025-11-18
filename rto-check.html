@@ -207,11 +207,20 @@
           }
           return response.json();
         })
-        .then(data => {
-            if (data && data.error) {
-                errorMessage.textContent = `Error: ${data.error}`;
+        .then(apiResponse => {
+            // CRITICAL FIX: The data is nested under the 'data' key
+            const data = apiResponse.data;
+            
+            if (apiResponse && apiResponse.error) {
+                errorMessage.textContent = `Error: ${apiResponse.error}`;
                 errorMessage.style.display = 'block';
                 return;
+            }
+            // Also check for error status from the API response (if provided)
+            if (apiResponse.status === false) {
+                 errorMessage.textContent = 'API Error: The server returned an error or failed status.';
+                 errorMessage.style.display = 'block';
+                 return;
             }
             if (!data || Object.keys(data).length === 0) {
                 errorMessage.textContent = 'Error: No vehicle data found for this number.';
@@ -225,22 +234,32 @@
             const ownerName = data.owner_name || 'N/A';
             ownerNameDisplay.innerHTML = `<strong>Vehicle Owner:</strong> <span style="font-size: 1.1em; color: var(--sv-color-dark);">${ownerName}</span>`;
             
-            // 2. Prepare other important information (excluding owner_name)
+            // 2. Prepare other important information
             let otherHtml = '';
             
-            // Define a preferred order for display
+            // Define the correct field mapping based on your API response
             const displayOrder = [
-                { key: 'registration_number', label: 'Registration No.' },
-                { key: 'make', label: 'Make' },
-                { key: 'model', label: 'Model' },
+                { key: 'registration_no', label: 'Registration No.' },
+                { key: 'maker_model', label: 'Make & Model' },
+                { key: 'vehicle_class', label: 'Vehicle Class' },
+                { key: 'vehicle_type', label: 'Vehicle Type' },
                 { key: 'fuel_type', label: 'Fuel Type' },
+                { key: 'fuel_norms', label: 'Fuel Norms' },
                 { key: 'rc_status', label: 'RC Status' },
                 { key: 'registration_date', label: 'Registration Date' },
+                { key: 'fitness_upto', label: 'Fitness Upto' },
                 { key: 'insurance_upto', label: 'Insurance Upto' },
+                { key: 'insurance_company', label: 'Insurance Company' },
                 { key: 'puc_upto', label: 'PUC Upto' },
-                { key: 'engine_number', label: 'Engine No.' },
-                { key: 'chassis_number', label: 'Chassis No.' },
-                { key: 'rto_office', label: 'RTO Office' }
+                { key: 'chassis_no', label: 'Chassis No.' },
+                { key: 'engine_no', label: 'Engine No.' },
+                { key: 'registration_authority', label: 'RTO Office' },
+                { key: 'vehicle_color', label: 'Color' },
+                { key: 'seat_capacity', label: 'Seat Capacity' },
+                { key: 'unload_weight', label: 'Unladen Weight (kg)' },
+                { key: 'body_type_desc', label: 'Body Type' },
+                { key: 'manufacture_month_year', label: 'Manufacture Date' },
+                { key: 'ownership_desc', label: 'Ownership' }
             ];
             
             // Object to track keys already processed (owner_name is pre-processed)
