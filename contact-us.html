@@ -9,11 +9,21 @@
   <link rel="stylesheet" href="css/sv-custom.css">
 </head>
 <body class="sv-page">
+  <div class="sv-topbar">
+    <div class="sv-container sv-topbar__inner">
+      <span>Hi, welcome to SV Enterprises. Login to manage or renew your policy.</span>
+      <div class="sv-topbar__actions">
+        <a href="#login">My Account</a>
+        <a href="mailto:Vijaysvinsurance1@gmail.com">Support</a>
+      </div>
+    </div>
+  </div>
+
   <header class="sv-header">
     <div class="sv-container sv-header__inner">
       <a class="sv-logo" href="index.html">
-        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 110px; margin-right: 10px;">
-        <span style="color: white; font-weight: bold; font-size: 1.5rem;">SV Enterprises</span>
+        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 56px;">
+        <span class="sv-logo__text">SV Enterprises</span>
       </a>
       <nav>
         <ul class="sv-nav">
@@ -23,7 +33,7 @@
           <li><a href="benefits.html">Benefits</a></li>
           <li><a href="claims.html">Claims</a></li>
           <li><a href="rto-check.html">RTO Check</a></li>
-          <li><a class="is-active" href="contact-us.html">Contact</a></li>
+          <li><a class="is-active" href="contact-us.html" aria-current="page">Contact</a></li>
         </ul>
       </nav>
       <div class="sv-header__cta">
@@ -36,7 +46,7 @@
   <main>
     <section class="sv-section">
       <div class="sv-container">
-        <div class="sv-hero sv-hero--contact">
+        <div class="sv-hero" style="background: var(--sv-hero-overlay), url('images/hero-business.jpg') center/cover no-repeat;">
           <div class="sv-hero__content sv-fade-up">
             <span class="sv-pill">Contact SV Enterprises</span>
             <h1 class="sv-hero__title">We’re here to support your next drive.</h1>
@@ -45,21 +55,30 @@
               <a class="sv-btn sv-btn--primary" href="#contact-form">Send a message</a>
               <a class="sv-btn sv-btn--ghost" href="https://wa.me/919380858219" target="_blank" rel="noopener">Chat on WhatsApp</a>
             </div>
-            <div class="sv-hero__meta">
-              <span>📍 Rajajinagar, Bangalore, Karnataka</span>
-              <span>📞 93808 58219 / 74118 12788</span>
-              <span>✉️ <a href="mailto:Vijaysvinsurance1@gmail.com">Vijaysvinsurance1@gmail.com</a></span>
+            <div class="sv-hero__quick-links">
+              <a class="sv-quick-card" href="#hours"><span>Visit</span><strong>Office hours & directions</strong></a>
+              <a class="sv-quick-card" href="#contact-form"><span>Message</span><strong>Share your requirement</strong></a>
+              <a class="sv-quick-card" href="#login"><span>Account</span><strong>Existing customer access</strong></a>
             </div>
           </div>
-          <div class="sv-hero__image">
-            <img src="images/hero-business.jpg" alt="SV Enterprises customer desk">
-          </div>
-          <div class="sv-scroll-indicator">Scroll</div>
+          <aside class="sv-hero__panel sv-fade-up">
+            <h3>Your direct helplines</h3>
+            <p>Talk to our advisors immediately for quotes, renewals, or emergency claim support.</p>
+            <ul>
+              <li><span>📍</span><div><strong>Rajajinagar, Bangalore</strong><br>2nd Floor, Main Road</div></li>
+              <li><span>📞</span><div><strong><a href="tel:+919380858219">+91 93808 58219</a></strong><br><a href="tel:+917411812788">74118 12788</a> alternate line</div></li>
+              <li><span>✉️</span><div><strong><a href="mailto:Vijaysvinsurance1@gmail.com">Vijaysvinsurance1@gmail.com</a></strong><br>Responses within business hours</div></li>
+            </ul>
+            <div class="sv-panel-actions">
+              <a class="sv-btn sv-btn--primary" href="tel:+919380858219">Call now</a>
+              <a class="sv-btn sv-btn--ghost" href="https://maps.app.goo.gl/ihBRHowvEB6kyXPY8" target="_blank" rel="noopener">Open map</a>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <section class="sv-section sv-section--compact">
+    <section class="sv-section sv-section--compact" id="hours">
       <div class="sv-container sv-grid-2">
         <div class="sv-contact-card sv-fade-up">
           <h3>Office hours</h3>

@@ -9,18 +9,28 @@
   <link rel="stylesheet" href="css/sv-custom.css">
 </head>
 <body class="sv-page">
+  <div class="sv-topbar">
+    <div class="sv-container sv-topbar__inner">
+      <span>Hi, welcome to SV Enterprises. Login to manage or renew your policy.</span>
+      <div class="sv-topbar__actions">
+        <a href="contact-us.html#login">My Account</a>
+        <a href="mailto:Vijaysvinsurance1@gmail.com">Support</a>
+      </div>
+    </div>
+  </div>
+
   <header class="sv-header">
     <div class="sv-container sv-header__inner">
       <a class="sv-logo" href="index.html">
-        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 110px; margin-right: 10px;">
-        <span style="color: white; font-weight: bold; font-size: 1.5rem;">SV Enterprises</span>
+        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 56px;">
+        <span class="sv-logo__text">SV Enterprises</span>
       </a>
       <nav>
         <ul class="sv-nav">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="products.html">Products</a></li>
-          <li><a class="is-active" href="benefits.html">Benefits</a></li>
+          <li><a class="is-active" href="benefits.html" aria-current="page">Benefits</a></li>
           <li><a href="claims.html">Claims</a></li>
           <li><a href="contact-us.html">Contact</a></li>
         </ul>
@@ -35,7 +45,7 @@
   <main>
     <section class="sv-section">
       <div class="sv-container">
-        <div class="sv-hero sv-hero--business">
+        <div class="sv-hero sv-hero--benefits">
           <div class="sv-hero__content sv-fade-up">
             <span class="sv-pill">Why choose SV Enterprises?</span>
             <h1 class="sv-hero__title">Motor insurance that puts you first.</h1>
@@ -44,23 +54,32 @@
               <a class="sv-btn sv-btn--primary" href="products.html">Browse products</a>
               <a class="sv-btn sv-btn--ghost" href="#benefits">See our edge</a>
             </div>
-            <div class="sv-hero__meta">
-              <span>💰 Optimised premiums</span>
-              <span>⚡ Rapid claims assistance</span>
-              <span>🌐 Nationwide insurer access</span>
+            <div class="sv-hero__quick-links">
+              <a class="sv-quick-card" href="#benefits"><span>Benefits</span><strong>What you gain with SV</strong></a>
+              <a class="sv-quick-card" href="#support"><span>Support</span><strong>Lifecycle assistance promise</strong></a>
+              <a class="sv-quick-card" href="#stats"><span>Stats</span><strong>Proof our customers trust</strong></a>
             </div>
           </div>
-          <div class="sv-hero__image">
-            <img src="images/hero-business.jpg" alt="Happy customers with insured vehicles">
-          </div>
-          <div class="sv-scroll-indicator">Scroll</div>
+          <aside class="sv-hero__panel sv-fade-up">
+            <h3>Your advantage at a glance</h3>
+            <p>Everything we do focuses on faster claims, better savings, and personal guidance.</p>
+            <ul>
+              <li><span>💰</span><div><strong>Optimised premiums</strong><br>Compare & switch without paperwork stress</div></li>
+              <li><span>⚡</span><div><strong>Rapid claim desk</strong><br>Real humans who chase approvals daily</div></li>
+              <li><span>🌐</span><div><strong>Nationwide network</strong><br>Access to every major motor insurer</div></li>
+            </ul>
+            <div class="sv-panel-actions">
+              <a class="sv-btn sv-btn--primary" href="https://wa.me/919380858219" target="_blank" rel="noopener">WhatsApp benefits</a>
+              <a class="sv-btn sv-btn--ghost" href="claims.html">See claim workflow</a>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
     <section class="sv-section sv-section--alt" id="benefits">
       <div class="sv-container">
-        <div class="sv-hero__content sv-fade-up" style="text-align:center;">
+        <div class="sv-hero__content sv-hero__content--center sv-fade-up">
           <span class="sv-pill">Our promise</span>
           <h2 class="sv-title">What makes SV Enterprises stand out</h2>
           <p class="sv-subtitle">Every policy comes with dedicated guidance, transparent comparisons, and on-ground support when you need it most.</p>
@@ -85,7 +104,7 @@
       </div>
     </section>
 
-    <section class="sv-section">
+    <section class="sv-section" id="support">
       <div class="sv-container sv-media">
         <div class="sv-media__content sv-fade-up">
           <span class="sv-pill">Support that stays</span>
@@ -103,7 +122,7 @@
       </div>
     </section>
 
-    <section class="sv-section">
+    <section class="sv-section" id="stats">
       <div class="sv-container">
         <div class="sv-stats">
           <div class="sv-stat sv-fade-up">

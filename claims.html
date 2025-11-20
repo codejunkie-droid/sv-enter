@@ -9,11 +9,21 @@
   <link rel="stylesheet" href="css/sv-custom.css">
 </head>
 <body class="sv-page">
+  <div class="sv-topbar">
+    <div class="sv-container sv-topbar__inner">
+      <span>Hi, welcome to SV Enterprises. Login to manage or renew your policy.</span>
+      <div class="sv-topbar__actions">
+        <a href="contact-us.html#login">My Account</a>
+        <a href="mailto:Vijaysvinsurance1@gmail.com">Support</a>
+      </div>
+    </div>
+  </div>
+
   <header class="sv-header">
     <div class="sv-container sv-header__inner">
       <a class="sv-logo" href="index.html">
-        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 110px; margin-right: 10px;">
-        <span style="color: white; font-weight: bold; font-size: 1.5rem;">SV Enterprises</span>
+        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 56px;">
+        <span class="sv-logo__text">SV Enterprises</span>
       </a>
       <nav>
         <ul class="sv-nav">
@@ -21,7 +31,7 @@
           <li><a href="about.html">About</a></li>
           <li><a href="products.html">Products</a></li>
           <li><a href="benefits.html">Benefits</a></li>
-          <li><a class="is-active" href="claims.html">Claims</a></li>
+          <li><a class="is-active" href="claims.html" aria-current="page">Claims</a></li>
           <li><a href="contact-us.html">Contact</a></li>
         </ul>
       </nav>
@@ -44,23 +54,32 @@
               <a class="sv-btn sv-btn--primary" href="#steps">View process</a>
               <a class="sv-btn sv-btn--ghost" href="#support">Request support</a>
             </div>
-            <div class="sv-hero__meta">
-              <span>🕑 24/7 helpline</span>
-              <span>📞 93808 58219 / 74118 12788</span>
-              <span>📍 Rajajinagar, Bangalore</span>
+            <div class="sv-hero__quick-links">
+              <a class="sv-quick-card" href="#steps"><span>Steps</span><strong>3-stage claims roadmap</strong></a>
+              <a class="sv-quick-card" href="#concierge"><span>Concierge</span><strong>What our desk handles</strong></a>
+              <a class="sv-quick-card" href="#support"><span>Support</span><strong>Request callback now</strong></a>
             </div>
           </div>
-          <div class="sv-hero__image">
-            <img src="images/hero-claims.jpg" alt="Claims support team">
-          </div>
-          <div class="sv-scroll-indicator">Scroll</div>
+          <aside class="sv-hero__panel sv-fade-up">
+            <h3>24/7 claims command</h3>
+            <p>Reach us anytime—our specialists co-ordinate surveyors, garages, and insurer desks within minutes.</p>
+            <ul>
+              <li><span>🕑</span><div><strong>Around-the-clock helpline</strong><br>Immediate guidance post-incident</div></li>
+              <li><span>📞</span><div><strong><a href="tel:+919380858219">+91 93808 58219</a></strong><br><a href="tel:+917411812788">74118 12788</a> alternate line</div></li>
+              <li><span>📍</span><div><strong>Rajajinagar, Bangalore</strong><br>Walk-ins welcome for documentation help</div></li>
+            </ul>
+            <div class="sv-panel-actions">
+              <a class="sv-btn sv-btn--primary" href="https://wa.me/919380858219" target="_blank" rel="noopener">WhatsApp incident</a>
+              <a class="sv-btn sv-btn--ghost" href="contact-us.html">Locate nearest desk</a>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
     <section class="sv-section sv-section--alt" id="steps">
       <div class="sv-container">
-        <div class="sv-hero__content sv-fade-up" style="text-align:center;">
+        <div class="sv-hero__content sv-hero__content--center sv-fade-up">
           <span class="sv-pill">Simple process</span>
           <h2 class="sv-title">Your claim handled in three clear steps</h2>
           <p class="sv-subtitle">Call us first—our desk handles coordination while you focus on safety and recovery.</p>
@@ -85,7 +104,7 @@
       </div>
     </section>
 
-    <section class="sv-section">
+    <section class="sv-section" id="concierge">
       <div class="sv-container sv-media">
         <div class="sv-media__content sv-fade-up">
           <span class="sv-pill">What we handle</span>

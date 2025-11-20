@@ -9,11 +9,21 @@
   <link rel="stylesheet" href="css/sv-custom.css">
 </head>
 <body class="sv-page">
+  <div class="sv-topbar">
+    <div class="sv-container sv-topbar__inner">
+      <span>Hi, welcome to SV Enterprises. Login to manage or renew your policy.</span>
+      <div class="sv-topbar__actions">
+        <a href="contact-us.html#login">My Account</a>
+        <a href="mailto:Vijaysvinsurance1@gmail.com">Support</a>
+      </div>
+    </div>
+  </div>
+
   <header class="sv-header">
     <div class="sv-container sv-header__inner">
       <a class="sv-logo" href="index.html">
-        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 110px; margin-right: 10px;">
-        <span style="color: white; font-weight: bold; font-size: 1.5rem;">SV Enterprises</span>
+        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 56px;">
+        <span class="sv-logo__text">SV Enterprises</span>
       </a>
       <nav>
         <ul class="sv-nav">
@@ -36,22 +46,37 @@
   <main>
     <section class="sv-section">
       <div class="sv-container">
-        <div class="sv-hero sv-hero--business">
+        <div class="sv-hero" style="background: var(--sv-hero-overlay), url('images/hero-business.jpg') center/cover no-repeat;">
           <div class="sv-hero__content sv-fade-up">
             <span class="sv-pill">Privacy Policy</span>
             <h1 class="sv-hero__title">Your privacy matters to us.</h1>
             <p class="sv-hero__text">This policy explains what information we collect, how we use it, and the choices you have.</p>
+            <div class="sv-hero__quick-links">
+              <a class="sv-quick-card" href="#collection"><span>Collection</span><strong>What data we gather</strong></a>
+              <a class="sv-quick-card" href="#usage"><span>Usage</span><strong>How information is used</strong></a>
+              <a class="sv-quick-card" href="#rights"><span>Rights</span><strong>Your choices & contact</strong></a>
+            </div>
           </div>
-          <div class="sv-hero__image">
-            <img src="images/hero-business.jpg" alt="Privacy at SV Enterprises">
-          </div>
+          <aside class="sv-hero__panel sv-fade-up">
+            <h3>Privacy questions?</h3>
+            <p>Reach our compliance desk for clarification, data requests, or opt-out instructions.</p>
+            <ul>
+              <li><span>📞</span><div><strong><a href="tel:+919380858219">+91 93808 58219</a></strong><br><a href="tel:+917411812788">74118 12788</a> alternate line</div></li>
+              <li><span>✉️</span><div><strong><a href="mailto:Vijaysvinsurance1@gmail.com">Vijaysvinsurance1@gmail.com</a></strong><br>Subject: Privacy Request</div></li>
+              <li><span>📍</span><div><strong>Rajajinagar, Bangalore</strong><br>Visit weekdays 10 AM – 5 PM</div></li>
+            </ul>
+            <div class="sv-panel-actions">
+              <a class="sv-btn sv-btn--primary" href="mailto:Vijaysvinsurance1@gmail.com?subject=Privacy%20Request">Email compliance</a>
+              <a class="sv-btn sv-btn--ghost" href="contact-us.html#contact-form">Contact form</a>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <section class="sv-section" id="policy">
+    <section class="sv-section" id="collection">
       <div class="sv-container">
-        <div class="sv-hero__content sv-fade-up">
+        <div class="sv-hero__content sv-hero__content--center sv-fade-up">
           <h2 class="sv-title">Information we collect</h2>
           <p class="sv-subtitle">We collect personal details you provide via our forms or when you contact us, including name, phone number, email, vehicle number, and enquiry details.</p>
           <ul class="sv-feature-list">
@@ -63,9 +88,9 @@
       </div>
     </section>
 
-    <section class="sv-section sv-section--alt">
+    <section class="sv-section sv-section--alt" id="usage">
       <div class="sv-container">
-        <div class="sv-hero__content sv-fade-up">
+        <div class="sv-hero__content sv-hero__content--center sv-fade-up">
           <h2 class="sv-title">How we use your information</h2>
           <p class="sv-subtitle">We use your information to respond to enquiries, provide quotes, process claims assistance, and share policy updates.</p>
           <ul class="sv-feature-list">
@@ -77,9 +102,9 @@
       </div>
     </section>
 
-    <section class="sv-section">
+    <section class="sv-section" id="sharing">
       <div class="sv-container">
-        <div class="sv-hero__content sv-fade-up">
+        <div class="sv-hero__content sv-hero__content--center sv-fade-up">
           <h2 class="sv-title">Sharing of information</h2>
           <p class="sv-subtitle">We may share your details with insurance companies and service partners strictly for the purpose of providing quotes, processing policies, or assisting with claims.</p>
           <p>We do not sell your personal information.</p>
@@ -87,16 +112,16 @@
       </div>
     </section>
 
-    <section class="sv-section sv-section--alt">
+    <section class="sv-section sv-section--alt" id="security">
       <div class="sv-container">
-        <div class="sv-hero__content sv-fade-up">
+        <div class="sv-hero__content sv-hero__content--center sv-fade-up">
           <h2 class="sv-title">Data security & retention</h2>
           <p class="sv-subtitle">We implement reasonable safeguards and retain information only as long as necessary to provide services and comply with legal obligations.</p>
         </div>
       </div>
     </section>
 
-    <section class="sv-section">
+    <section class="sv-section" id="rights">
       <div class="sv-container sv-grid-2">
         <div class="sv-contact-card sv-fade-up">
           <h3>Your choices</h3>

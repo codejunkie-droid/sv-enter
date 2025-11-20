@@ -9,16 +9,26 @@
   <link rel="stylesheet" href="css/sv-custom.css">
 </head>
 <body class="sv-page">
+  <div class="sv-topbar">
+    <div class="sv-container sv-topbar__inner">
+      <span>Hi, welcome to SV Enterprises. Login to manage or renew your policy.</span>
+      <div class="sv-topbar__actions">
+        <a href="contact-us.html#login">My Account</a>
+        <a href="mailto:Vijaysvinsurance1@gmail.com">Support</a>
+      </div>
+    </div>
+  </div>
+
   <header class="sv-header">
     <div class="sv-container sv-header__inner">
       <a class="sv-logo" href="index.html">
-        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 110px; margin-right: 10px;">
-        <span style="color: white; font-weight: bold; font-size: 1.5rem;">SV Enterprises</span>
+        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 56px;">
+        <span class="sv-logo__text">SV Enterprises</span>
       </a>
       <nav>
         <ul class="sv-nav">
           <li><a href="index.html">Home</a></li>
-          <li><a class="is-active" href="about.html">About</a></li>
+          <li><a class="is-active" href="about.html" aria-current="page">About</a></li>
           <li><a href="products.html">Products</a></li>
           <li><a href="benefits.html">Benefits</a></li>
           <li><a href="claims.html">Claims</a></li>
@@ -45,21 +55,30 @@
               <a class="sv-btn sv-btn--primary" href="products.html">View our solutions</a>
               <a class="sv-btn sv-btn--ghost" href="contact-us.html">Talk to us</a>
             </div>
-            <div class="sv-hero__meta">
-              <span>🗓️ Serving drivers since 2008</span>
-              <span>📍 Rajajinagar, Bangalore</span>
-              <span>🤝 20+ insurer partnerships</span>
+            <div class="sv-hero__quick-links">
+              <a class="sv-quick-card" href="#story"><span>Story</span><strong>From desk to statewide partner</strong></a>
+              <a class="sv-quick-card" href="#values"><span>Values</span><strong>Principles we live by</strong></a>
+              <a class="sv-quick-card" href="#team"><span>Team</span><strong>Advisors & claim champions</strong></a>
             </div>
           </div>
-          <div class="sv-hero__image">
-            <img src="images/hero-about.jpg" alt="SV Enterprises advisory team">
-          </div>
-          <div class="sv-scroll-indicator">Scroll</div>
+          <aside class="sv-hero__panel sv-fade-up">
+            <h3>Your neighbourhood desk</h3>
+            <p>Meet the team that keeps motorists confident across Karnataka.</p>
+            <ul>
+              <li><span>🗓️</span><div><strong>Serving since 2008</strong><br>Decades of on-ground experience</div></li>
+              <li><span>📍</span><div><strong>Rajajinagar, Bangalore</strong><br>Walk-ins welcome Monday to Saturday</div></li>
+              <li><span>🤝</span><div><strong>20+ insurer partners</strong><br>Handpicked plans tailored for you</div></li>
+            </ul>
+            <div class="sv-panel-actions">
+              <a class="sv-btn sv-btn--primary" href="https://wa.me/919380858219" target="_blank" rel="noopener">WhatsApp our desk</a>
+              <a class="sv-btn sv-btn--ghost" href="contact-us.html">Book a visit</a>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <section class="sv-section">
+    <section class="sv-section" id="story">
       <div class="sv-container sv-media">
         <div class="sv-media__content sv-fade-up">
           <span class="sv-pill">Our Story</span>
@@ -77,9 +96,9 @@
       </div>
     </section>
 
-    <section class="sv-section sv-section--alt">
+    <section class="sv-section sv-section--alt" id="values">
       <div class="sv-container">
-        <div class="sv-hero__content sv-fade-up" style="text-align:center;">
+        <div class="sv-hero__content sv-hero__content--center sv-fade-up">
           <span class="sv-pill">Our Values</span>
           <h2 class="sv-title">Principles that guide every interaction</h2>
           <p class="sv-subtitle">We stay close to customers, advocate during claims, and ensure you never feel alone on the road.</p>
@@ -104,9 +123,9 @@
       </div>
     </section>
 
-    <section class="sv-section">
+    <section class="sv-section" id="team">
       <div class="sv-container">
-        <div class="sv-hero__content sv-fade-up" style="text-align:center;">
+        <div class="sv-hero__content sv-hero__content--center sv-fade-up">
           <span class="sv-pill">Leadership & Team</span>
           <h2 class="sv-title">Advisors, claim champions, and client advocates</h2>
           <p class="sv-subtitle">Our multi-disciplinary team combines underwriting expertise, logistics experience, and customer support to keep every journey protected.</p>

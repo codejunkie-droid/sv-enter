@@ -8,55 +8,81 @@
   <link rel="icon" type="image/png" href="images/fav.png">
   <link rel="stylesheet" href="css/sv-custom.css">
   <style>
-    /* Custom styling for the lookup page */
     .sv-form-group {
       margin-bottom: 1.5rem;
     }
+
     .sv-form-control {
       width: 100%;
-      padding: 0.75rem;
-      border: 1px solid var(--sv-color-grey-300);
-      border-radius: var(--sv-border-radius);
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(15, 30, 30, 0.12);
+      border-radius: var(--sv-radius-md);
       font-size: 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
+
+    .sv-form-control:focus {
+      outline: none;
+      border-color: var(--sv-indigo);
+      box-shadow: 0 0 0 3px rgba(36, 180, 179, 0.2);
+    }
+
     .sv-lookup-result {
       margin-top: 2rem;
-      padding: 1.5rem;
-      border: 1px solid var(--sv-color-primary);
-      border-radius: var(--sv-border-radius);
-      background-color: var(--sv-color-white); 
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      padding: 1.8rem;
+      border: 1px solid rgba(36, 180, 179, 0.2);
+      border-radius: var(--sv-radius-lg);
+      background-color: var(--sv-card);
+      box-shadow: 0 18px 34px rgba(7, 48, 55, 0.12);
     }
+
     .sv-result-title {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       margin-bottom: 1rem;
-      color: var(--sv-color-primary);
-      border-bottom: 2px solid var(--sv-color-primary-light);
+      color: var(--sv-indigo-dark);
+      border-bottom: 2px solid rgba(36, 180, 179, 0.2);
       padding-bottom: 0.5rem;
     }
+
     .sv-result-item {
-      padding: 0.5rem 0;
-      border-bottom: 1px dashed var(--sv-color-grey-200);
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed rgba(15, 30, 30, 0.12);
     }
+
     .sv-result-item:last-child {
       border-bottom: none;
     }
-    /* Ensure the key stands out */
+
     .sv-result-item strong {
       display: inline-block;
       min-width: 150px;
       font-weight: 600;
+      color: var(--sv-midnight);
     }
+
     .sv-error {
-        color: #e74c3c; /* A standard error red */
-        font-weight: bold;
+      color: #e43d40;
+      font-weight: 600;
     }
   </style>
 </head>
 <body class="sv-page">
+  <div class="sv-topbar">
+    <div class="sv-container sv-topbar__inner">
+      <span>Hi, welcome to SV Enterprises. Login to manage or renew your policy.</span>
+      <div class="sv-topbar__actions">
+        <a href="contact-us.html#login">My Account</a>
+        <a href="mailto:Vijaysvinsurance1@gmail.com">Support</a>
+      </div>
+    </div>
+  </div>
+
   <header class="sv-header">
     <div class="sv-container sv-header__inner">
-      <a class="sv-logo" href="index.html">SV Enterprises</a>
+      <a class="sv-logo" href="index.html">
+        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 56px;">
+        <span class="sv-logo__text">SV Enterprises</span>
+      </a>
       <nav>
         <ul class="sv-nav">
           <li><a href="index.html">Home</a></li>
@@ -81,42 +107,77 @@
         <div class="sv-hero" style="background: var(--sv-hero-overlay), url('images/hero-motor.jpg') center/cover no-repeat;">
           <div class="sv-hero__content sv-fade-up">
             <span class="sv-pill">Quick Vehicle Check</span>
-            <h1 class="sv-hero__title">Instantly Check Vehicle RTO Details</h1>
-            <p class="sv-hero__text">Enter any Indian vehicle registration number to get instant details about the vehicle owner and registration data.</p>
+            <h1 class="sv-hero__title">Instantly check vehicle RTO details</h1>
+            <p class="sv-hero__text">Enter any Indian vehicle registration number to retrieve ownership and registration information within seconds.</p>
+            <div class="sv-hero__actions">
+              <a class="sv-btn sv-btn--primary" href="#lookup">Start lookup</a>
+              <a class="sv-btn sv-btn--ghost" href="#faq">View FAQ</a>
+            </div>
+            <div class="sv-hero__quick-links">
+              <a class="sv-quick-card" href="#lookup"><span>Lookup</span><strong>Enter registration number</strong></a>
+              <a class="sv-quick-card" href="#results"><span>Results</span><strong>See decoded vehicle data</strong></a>
+              <a class="sv-quick-card" href="#faq"><span>Help</span><strong>Know what information means</strong></a>
+            </div>
+          </div>
+          <aside class="sv-hero__panel sv-fade-up">
+            <h3>Need assistance?</h3>
+            <p>Our team can help interpret results, verify ownership, or start insurance paperwork based on lookups.</p>
+            <ul>
+              <li><span>📞</span><div><strong><a href="tel:+919380858219">+91 93808 58219</a></strong><br>Talk to an advisor now</div></li>
+              <li><span>✉️</span><div><strong><a href="mailto:Vijaysvinsurance1@gmail.com">Email our desk</a></strong><br>Attach your lookup results</div></li>
+              <li><span>🕑</span><div><strong>9:30 AM – 7:00 PM</strong><br>Support from Rajajinagar office</div></li>
+            </ul>
+            <div class="sv-panel-actions">
+              <a class="sv-btn sv-btn--primary" href="https://wa.me/919380858219" target="_blank" rel="noopener">WhatsApp us</a>
+              <a class="sv-btn sv-btn--ghost" href="contact-us.html">Visit contact page</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="sv-section sv-section--compact" id="lookup">
+      <div class="sv-container">
+        <div class="sv-hero__content sv-hero__content--center sv-fade-up">
+          <h2 class="sv-title">Vehicle registration number lookup</h2>
+          <p class="sv-subtitle">Enter the registration number (e.g., KA01AB1234) to fetch registration, insurance, and vehicle metadata from public records.</p>
+        </div>
+
+        <div class="sv-grid-2">
+          <div>
+            <form id="vehicleLookupForm" class="sv-card sv-fade-up">
+              <div class="sv-form-group">
+                <label for="vehicle_no">Vehicle Registration Number</label>
+                <input type="text" id="vehicle_no" name="vehicle_no" class="sv-form-control" placeholder="e.g., KA01AB1234" required>
+              </div>
+              <button type="submit" class="sv-btn sv-btn--primary">Search details</button>
+              <p id="loadingMessage" style="display:none; margin-top: 1rem;">Loading vehicle data... Please wait.</p>
+              <p id="errorMessage" class="sv-error" style="display:none; margin-top: 1rem;"></p>
+            </form>
+          </div>
+
+          <div id="results" class="sv-fade-up">
+            <div id="resultsContainer" class="sv-lookup-result" style="display:none;">
+              <h3 class="sv-result-title">Vehicle details</h3>
+              <div id="ownerNameDisplay" class="sv-result-item"></div>
+              <div id="otherInfoDisplay"></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="sv-section sv-section--compact">
-        <div class="sv-container">
-            <div class="sv-hero__content sv-fade-up" style="text-align:center;">
-                <h2 class="sv-title">Vehicle Registration Number Lookup</h2>
-                <p class="sv-subtitle">Enter the vehicle number (e.g., KA01AB1234) to retrieve registration details.</p>
-            </div>
-            
-            <div class="sv-grid-2">
-                <div>
-                    <form id="vehicleLookupForm" class="sv-card sv-fade-up">
-                        <div class="sv-form-group">
-                            <label for="vehicle_no">Vehicle Registration Number</label>
-                            <input type="text" id="vehicle_no" name="vehicle_no" class="sv-form-control" placeholder="e.g., KA01AB1234" required>
-                        </div>
-                        <button type="submit" class="sv-btn sv-btn--primary">Search Details</button>
-                        <p id="loadingMessage" style="display:none; margin-top: 1rem;">Loading vehicle data... Please wait.</p>
-                        <p id="errorMessage" class="sv-error" style="display:none; margin-top: 1rem;"></p>
-                    </form>
-                </div>
-
-                <div>
-                    <div id="resultsContainer" class="sv-lookup-result sv-fade-up" style="display:none;">
-                        <h3 class="sv-result-title">Vehicle Details</h3>
-                        <div id="ownerNameDisplay" class="sv-result-item"></div>
-                        <div id="otherInfoDisplay"></div>
-                    </div>
-                </div>
-            </div>
+    <section class="sv-section sv-section--alt" id="faq">
+      <div class="sv-container sv-grid-2">
+        <div class="sv-card sv-fade-up">
+          <h3 class="sv-card__title">What information is provided?</h3>
+          <p class="sv-card__text">The lookup returns owner name (where available), registration status, insurance validity, fitness details, and more based on public RTO data.</p>
         </div>
+        <div class="sv-card sv-fade-up">
+          <h3 class="sv-card__title">When should I contact SV?</h3>
+          <p class="sv-card__text">If you need help deciphering the results, want to update insurance, or require ownership transfer assistance, reach our advisors anytime.</p>
+        </div>
+      </div>
     </section>
   </main>
 
