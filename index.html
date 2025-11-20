@@ -21,11 +21,18 @@
 
   <header class="sv-header">
     <div class="sv-container sv-header__inner">
-      <a class="sv-logo" href="index.html">
-        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 56px;">
-        <span class="sv-logo__text">SV Enterprises</span>
-      </a>
-      <nav>
+      <div class="sv-header__brand">
+        <a class="sv-logo" href="index.html">
+          <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 56px;">
+          <span class="sv-logo__text">SV Enterprises</span>
+        </a>
+        <button class="sv-header__menu-btn" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <nav class="sv-nav-wrapper" data-collapsed="true">
         <ul class="sv-nav">
           <li><a class="is-active" href="index.html" aria-current="page">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -62,7 +69,6 @@
             <h1 class="sv-hero__title">Lowest Price Guarantee — Get a Quote Today 🇮🇳</h1>
             <p class="sv-hero__text">Affordable vehicle insurance for autos, bikes, cars &amp; trucks — quick online quotes.</p>
             <div class="sv-hero__cta-group">
-              <a class="sv-btn sv-btn--primary sv-btn--gold" href="contact-us.html#contact-form">Get Quote</a>
               <a class="sv-btn sv-btn--outline" href="rto-check.html" title="Check RTO details &amp; RC status">RTO Check</a>
               <a class="sv-btn sv-btn--outline" href="contact-us.html">Contact Us</a>
             </div>
@@ -76,14 +82,14 @@
                 <span aria-hidden="true">📞</span>
                 <div>
                   <strong>Call / WhatsApp</strong>
-                  <a href="tel:+9198XXXXXXX">+91 98X-XXX-XXXX</a>
+                  <a href="tel:+919380858219">+91 93808 58219</a>
                 </div>
               </li>
               <li>
                 <span aria-hidden="true">✉️</span>
                 <div>
                   <strong>Email</strong>
-                  <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>
+                  <a href="mailto:Vijaysvinsurance1@gmail.com">Vijaysvinsurance1@gmail.com</a>
                 </div>
               </li>
             </ul>
@@ -146,13 +152,31 @@
         <div class="sv-card sv-fade-up">
           <h2 class="sv-title">We partner with all leading insurance companies</h2>
           <p class="sv-subtitle">Access bespoke cover from India’s most trusted motor insurers through a single advisory desk.</p>
-          <div class="sv-icon-row">
-            <span class="sv-badge"><img src="images/Business-Commercial-Insurance.svg" alt="Bajaj Allianz" style="height: 20px; width: auto; margin-right: 8px;">Bajaj Allianz</span>
-            <span class="sv-badge"><img src="images/Health-Insurance.svg" alt="HDFC ERGO" style="height: 20px; width: auto; margin-right: 8px;">HDFC ERGO</span>
-            <span class="sv-badge"><img src="images/Home-Property-Insurance.svg" alt="TATA AIG" style="height: 20px; width: auto; margin-right: 8px;">TATA AIG</span>
-            <span class="sv-badge"><img src="images/Life-Insurance-2.svg" alt="ICICI Lombard" style="height: 20px; width: auto; margin-right: 8px;">ICICI Lombard</span>
-            <span class="sv-badge"><img src="images/Motor-Insurance.svg" alt="Go Digit" style="height: 20px; width: auto; margin-right: 8px;">Go Digit</span>
-            <span class="sv-badge"><img src="images/Travel-Insurance.svg" alt="Royal Sundaram" style="height: 20px; width: auto; margin-right: 8px;">Royal Sundaram</span>
+          <div class="sv-partner-logos">
+            <figure>
+              <img src="images/partners/bajaj-allianz.png" alt="Bajaj Allianz logo">
+              <figcaption>Bajaj Allianz</figcaption>
+            </figure>
+            <figure>
+              <img src="images/partners/hdfc-ergo.png" alt="HDFC ERGO logo">
+              <figcaption>HDFC ERGO</figcaption>
+            </figure>
+            <figure>
+              <img src="images/partners/tata-aig.png" alt="TATA AIG logo">
+              <figcaption>TATA AIG</figcaption>
+            </figure>
+            <figure>
+              <img src="images/partners/icici-lombard.png" alt="ICICI Lombard logo">
+              <figcaption>ICICI Lombard</figcaption>
+            </figure>
+            <figure>
+              <img src="images/partners/go-digit.png" alt="Go Digit logo">
+              <figcaption>Go Digit</figcaption>
+            </figure>
+            <figure>
+              <img src="images/partners/royal-sundaram.png" alt="Royal Sundaram logo">
+              <figcaption>Royal Sundaram</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -218,5 +242,30 @@
       </div>
     </div>
   </footer>
+  <script>
+    const menuBtn = document.querySelector('.sv-header__menu-btn');
+    const navWrapper = document.querySelector('.sv-nav-wrapper');
+    const body = document.body;
+    if (menuBtn && navWrapper) {
+      const closeMenu = () => {
+        menuBtn.setAttribute('aria-expanded', 'false');
+        navWrapper.dataset.collapsed = 'true';
+        body.classList.remove('sv-menu-open');
+      };
+      menuBtn.addEventListener('click', () => {
+        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+        menuBtn.setAttribute('aria-expanded', String(!expanded));
+        navWrapper.dataset.collapsed = expanded ? 'true' : 'false';
+        body.classList.toggle('sv-menu-open', !expanded);
+      });
+      navWrapper.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          if (window.matchMedia('(max-width: 1024px)').matches) {
+            closeMenu();
+          }
+        });
+      });
+    }
+  </script>
 </body>
 </html>
