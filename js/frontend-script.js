@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const body = document.body;
 
   if (menuBtn && navWrapper) {
+    // Create backdrop if it doesn't exist
     let backdrop = document.querySelector('.sv-menu-backdrop');
     if (!backdrop) {
       backdrop = document.createElement('div');
@@ -45,43 +46,45 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     };
 
+    // Initialize
     syncMenuForViewport();
 
+    // Handle Resize
     window.addEventListener('resize', syncMenuForViewport, { passive: true });
 
+    // Toggle Button Click
     menuBtn.addEventListener('click', (event) => {
       if (!isMobile()) return;
       event.preventDefault();
+      event.stopPropagation();
       const shouldOpen = !body.classList.contains('sv-menu-open');
       setMenuState(shouldOpen);
     });
 
-    // --- CRITICAL FIX START ---
+    // --- NEW NAVIGATION LOGIC (The Fix) ---
     navLinks.forEach((link) => {
       link.addEventListener('click', (event) => {
         if (!isMobile()) return;
-        
-        // 1. We DO NOT use event.preventDefault().
-        //    We let the browser handle the navigation normally.
-        
-        // 2. We wait 250ms before closing the menu.
-        //    This ensures the 'click' registers fully before the element disappears.
-        setTimeout(() => {
-          closeMenu();
-        }, 250);
+
+        const href = link.getAttribute('href');
+
+        // SCENARIO 1: Anchor Links (e.g., "#benefits")
+        // These don't reload the page, so we MUST close the menu manually.
+        if (href && href.startsWith('#')) {
+          closeMenu(); 
+        }
+
+        // SCENARIO 2: Real Page Links (e.g., "about.html", "contact.html")
+        // We do NOTHING. We do NOT preventDefault. We do NOT close the menu.
+        // We let the browser handle the click 100% naturally.
+        // The menu will disappear when the new page loads.
       });
     });
-    // --- CRITICAL FIX END ---
 
+    // Close on backdrop click
     backdrop.addEventListener('click', closeMenu, { passive: true });
 
-    document.addEventListener('click', (event) => {
-      if (!body.classList.contains('sv-menu-open')) return;
-      const target = event.target;
-      if (navWrapper.contains(target) || menuBtn.contains(target)) return;
-      closeMenu();
-    }, true);
-
+    // Close on Escape key
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && body.classList.contains('sv-menu-open')) {
         closeMenu();
@@ -90,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   /* =========================================
-     2. FORM SUBMISSION LOGIC (Keep existing)
+     2. FORM SUBMISSION LOGIC
      ========================================= */
   if (typeof jQuery !== 'undefined') {
     jQuery(document).ready(function ($) {
