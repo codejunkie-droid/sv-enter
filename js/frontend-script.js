@@ -56,15 +56,22 @@ document.addEventListener('DOMContentLoaded', function() {
       setMenuState(shouldOpen);
     });
 
-    // --- FIX APPLIED HERE ---
+    // --- CRITICAL FIX START ---
     navLinks.forEach((link) => {
       link.addEventListener('click', (event) => {
         if (!isMobile()) return;
-        // Simply close the menu and let the browser handle the link naturally.
-        // We removed event.preventDefault() and the setTimeout.
-        closeMenu();
+        
+        // 1. We DO NOT use event.preventDefault().
+        //    We let the browser handle the navigation normally.
+        
+        // 2. We wait 250ms before closing the menu.
+        //    This ensures the 'click' registers fully before the element disappears.
+        setTimeout(() => {
+          closeMenu();
+        }, 250);
       });
     });
+    // --- CRITICAL FIX END ---
 
     backdrop.addEventListener('click', closeMenu, { passive: true });
 
@@ -85,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
   /* =========================================
      2. FORM SUBMISSION LOGIC (Keep existing)
      ========================================= */
-  // (Wrapped in jQuery as per your original file)
   if (typeof jQuery !== 'undefined') {
     jQuery(document).ready(function ($) {
       var $forms = $('form[action^="https://formsubmit.co/"]');
@@ -115,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
           var actionUrl = $form.attr('action');
           var ajaxUrl = actionUrl.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
 
-          // Fetch Logic
           fetch(ajaxUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
