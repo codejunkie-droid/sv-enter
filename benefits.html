@@ -121,7 +121,7 @@
           </ul>
         </div>
         <div class="sv-media__image">
-          <img src="images/hero-team.jpg" alt="SV Enterprises support team">
+          <img src="images/hero-business.jpg" alt="SV Enterprises support team">
         </div>
       </div>
     </section>
@@ -166,9 +166,15 @@
           <div class="sv-footer__brand">SV Enterprises</div>
           <p>Motor & Vehicle Insurance Specialists safeguarding ambitions across Karnataka with agile advisory and claims excellence.</p>
           <div class="sv-social">
-            <a href="#" aria-label="LinkedIn">in</a>
-            <a href="#" aria-label="Twitter">X</a>
-            <a href="#" aria-label="YouTube">▶</a>
+            <a href="https://share.google/YKUy2WqT9sCqnjYEH" target="_blank" rel="noopener noreferrer" aria-label="Google">
+              <img src="images/social/google.png" alt="Google" width="32" height="32">
+            </a>
+            <a href="https://www.instagram.com/svinsurance1?igsh=czVycGl0NnBtaHhu" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <img src="images/social/instagram.png" alt="Instagram" width="32" height="32">
+            </a>
+            <a href="https://www.facebook.com/share/14QaaX6EZTw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <img src="images/social/facebook.png" alt="Facebook" width="32" height="32">
+            </a>
           </div>
         </div>
         <div>
@@ -198,29 +204,6 @@
       </div>
     </div>
   </footer>
-  <script>
-    const menuBtn = document.querySelector('.sv-header__menu-btn');
-    const navWrapper = document.querySelector('.sv-nav-wrapper');
-    const body = document.body;
-    if (menuBtn && navWrapper) {
-      const closeMenu = () => {
-        menuBtn.setAttribute('aria-expanded', 'false');
-        navWrapper.dataset.collapsed = 'true';
-        body.classList.remove('sv-menu-open');
-      };
-      menuBtn.addEventListener('click', () => {
-        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-        menuBtn.setAttribute('aria-expanded', String(!expanded));
-        navWrapper.dataset.collapsed = expanded ? 'true' : 'false';
-        body.classList.toggle('sv-menu-open', !expanded);
-      });
-      navWrapper.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
-          if (window.matchMedia('(max-width: 1024px)').matches) {
-            closeMenu();
-          }
-        });
-      });
-    }
-  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+  <script src="js/frontend-script.js" defer></script>
 </body>

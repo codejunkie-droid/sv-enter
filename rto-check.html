@@ -75,11 +75,18 @@
 
   <header class="sv-header">
     <div class="sv-container sv-header__inner">
-      <a class="sv-logo" href="index.html">
-        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 56px;">
-        <span class="sv-logo__text">SV Enterprises</span>
-      </a>
-      <nav>
+      <div class="sv-header__brand">
+        <a class="sv-logo" href="index.html">
+          <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo" style="height: 56px;">
+          <span class="sv-logo__text">SV Enterprises</span>
+        </a>
+        <button class="sv-header__menu-btn" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <nav class="sv-nav-wrapper" data-collapsed="true">
         <ul class="sv-nav">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -184,9 +191,15 @@
           <div class="sv-footer__brand">SV Enterprises</div>
           <p>Motor &amp; Vehicle Insurance Specialists safeguarding ambitions across Karnataka with agile advisory and claims excellence.</p>
           <div class="sv-social">
-            <a href="#" aria-label="LinkedIn">in</a>
-            <a href="#" aria-label="Twitter">X</a>
-            <a href="#" aria-label="YouTube">▶</a>
+            <a href="https://share.google/YKUy2WqT9sCqnjYEH" target="_blank" rel="noopener noreferrer" aria-label="Google">
+              <img src="images/social/google.png" alt="Google" width="32" height="32">
+            </a>
+            <a href="https://www.instagram.com/svinsurance1?igsh=czVycGl0NnBtaHhu" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <img src="images/social/instagram.png" alt="Instagram" width="32" height="32">
+            </a>
+            <a href="https://www.facebook.com/share/14QaaX6EZTw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <img src="images/social/facebook.png" alt="Facebook" width="32" height="32">
+            </a>
           </div>
         </div>
         <div>
@@ -235,10 +248,11 @@
       const loadingMessage = document.getElementById('loadingMessage');
       const errorMessage = document.getElementById('errorMessage');
 
-      // Get the vehicle number, convert to uppercase, trim, and safely URL-encode it
-      const rawVehicleNo = vehicleNoInput.value.trim().toUpperCase();
+      // Get the vehicle number, convert to lowercase, trim, and safely URL-encode it
+      const rawVehicleNo = vehicleNoInput.value.trim().toLowerCase();
       const encodedVehicleNo = encodeURIComponent(rawVehicleNo);
-      const apiEndpoint = `https://vehicle.rahulrk98503.workers.dev/?vehicle_no=${encodedVehicleNo}`;
+      // New API endpoint
+      const apiEndpoint = `https://meowmeow.rf.gd/gand/vimg.php?vehicle=${encodedVehicleNo}&i=1`;
 
       // Reset previous states and show loading
       resultsContainer.style.display = 'none';
@@ -249,15 +263,12 @@
       vehicleNoInput.setAttribute('disabled', 'true');
       document.querySelector('button[type="submit"]').setAttribute('disabled', 'true');
 
-
       fetch(apiEndpoint)
         .then(response => {
-          loadingMessage.style.display = 'none';
-          vehicleNoInput.removeAttribute('disabled');
-          document.querySelector('button[type="submit"]').removeAttribute('disabled');
-
           if (!response.ok) {
-            // Attempt to read JSON error message if present, otherwise throw generic error
+            loadingMessage.style.display = 'none';
+            vehicleNoInput.removeAttribute('disabled');
+            document.querySelector('button[type="submit"]').removeAttribute('disabled');
             return response.json().catch(() => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             });
@@ -265,78 +276,91 @@
           return response.json();
         })
         .then(apiResponse => {
-            // CRITICAL FIX: The data is nested under the 'data' key
-            const data = apiResponse.data;
+            loadingMessage.style.display = 'none';
+            vehicleNoInput.removeAttribute('disabled');
+            document.querySelector('button[type="submit"]').removeAttribute('disabled');
             
+            // Check for errors
             if (apiResponse && apiResponse.error) {
                 errorMessage.textContent = `Error: ${apiResponse.error}`;
                 errorMessage.style.display = 'block';
                 return;
             }
-            // Also check for error status from the API response (if provided)
-            if (apiResponse.status === false) {
-                 errorMessage.textContent = 'API Error: The server returned an error or failed status.';
-                 errorMessage.style.display = 'block';
-                 return;
-            }
-            if (!data || Object.keys(data).length === 0) {
+            
+            // Check if data exists
+            if (!apiResponse.data || Object.keys(apiResponse.data).length === 0) {
                 errorMessage.textContent = 'Error: No vehicle data found for this number.';
                 errorMessage.style.display = 'block';
                 return;
             }
 
-            // --- Process and Display Data ---
+            // Extract data from Nexus1 (primary source)
+            const nexus1 = apiResponse.data.Nexus1 || {};
+            const nexus2 = apiResponse.data.Nexus2 || {};
             
-            // 1. Prioritize and display Owner Name
-            const ownerName = data.owner_name || 'N/A';
+            // Display Owner Name
+            const ownerName = nexus1.owner_name || nexus2['Owner Name'] || 'N/A';
             ownerNameDisplay.innerHTML = `<strong>Vehicle Owner:</strong> <span style="font-size: 1.1em; color: var(--sv-color-dark);">${ownerName}</span>`;
             
-            // 2. Prepare other important information
+            // Prepare other information - filter out null values
             let otherHtml = '';
             
-            // Define the correct field mapping based on your API response
-            const displayOrder = [
-                { key: 'registration_no', label: 'Registration No.' },
-                { key: 'maker_model', label: 'Make & Model' },
-                { key: 'vehicle_class', label: 'Vehicle Class' },
-                { key: 'vehicle_type', label: 'Vehicle Type' },
-                { key: 'fuel_type', label: 'Fuel Type' },
-                { key: 'fuel_norms', label: 'Fuel Norms' },
-                { key: 'rc_status', label: 'RC Status' },
-                { key: 'registration_date', label: 'Registration Date' },
-                { key: 'fitness_upto', label: 'Fitness Upto' },
-                { key: 'insurance_upto', label: 'Insurance Upto' },
-                { key: 'insurance_company', label: 'Insurance Company' },
-                { key: 'puc_upto', label: 'PUC Upto' },
-                { key: 'chassis_no', label: 'Chassis No.' },
-                { key: 'engine_no', label: 'Engine No.' },
-                { key: 'registration_authority', label: 'RTO Office' },
-                { key: 'vehicle_color', label: 'Color' },
-                { key: 'seat_capacity', label: 'Seat Capacity' },
-                { key: 'unload_weight', label: 'Unladen Weight (kg)' },
-                { key: 'body_type_desc', label: 'Body Type' },
-                { key: 'manufacture_month_year', label: 'Manufacture Date' },
-                { key: 'ownership_desc', label: 'Ownership' }
+            // Field mapping for Nexus1 data
+            const nexus1Fields = [
+                { key: 'reg_no', label: 'Registration No.' },
+                { key: 'maker', label: 'Manufacturer' },
+                { key: 'maker_modal', label: 'Model' },
+                { key: 'vh_class', label: 'Vehicle Class' },
+                { key: 'regn_dt', label: 'Registration Date' },
+                { key: 'insUpto', label: 'Insurance Upto' }
             ];
             
-            // Object to track keys already processed (owner_name is pre-processed)
-            const processedKeys = new Set(['owner_name', 'error', 'vehicle_no']);
-
-            // Add fields in the preferred order
-            displayOrder.forEach(field => {
-                if (data[field.key]) {
-                    otherHtml += `<div class="sv-result-item"><strong>${field.label}:</strong> ${data[field.key]}</div>`;
-                    processedKeys.add(field.key);
+            // Field mapping for Nexus2 data
+            const nexus2Fields = [
+                { key: 'Father\'s Name', label: 'Father\'s Name' },
+                { key: 'Model Name', label: 'Model Name' },
+                { key: 'Vehicle Class', label: 'Vehicle Class' },
+                { key: 'Fuel Type', label: 'Fuel Type' },
+                { key: 'Registration Date', label: 'Registration Date' },
+                { key: 'Insurance Expiry', label: 'Insurance Expiry' },
+                { key: 'Registered RTO', label: 'Registered RTO' },
+                { key: 'Address', label: 'RTO Address' },
+                { key: 'City Name', label: 'City Name' }
+            ];
+            
+            // Process Nexus1 fields (skip null, undefined, and image)
+            nexus1Fields.forEach(field => {
+                const value = nexus1[field.key];
+                if (value !== null && value !== undefined && value !== '' && field.key !== 'image') {
+                    otherHtml += `<div class="sv-result-item"><strong>${field.label}:</strong> ${value}</div>`;
                 }
             });
-
-            // Add any remaining fields that were in the API response but not in the displayOrder
-            for (const key in data) {
-                if (data.hasOwnProperty(key) && !processedKeys.has(key) && data[key] !== null && data[key] !== undefined) {
-                    // Simple title-case for keys not in the preferred map
+            
+            // Process Nexus2 fields (skip null values)
+            nexus2Fields.forEach(field => {
+                const value = nexus2[field.key];
+                if (value !== null && value !== undefined && value !== '') {
+                    otherHtml += `<div class="sv-result-item"><strong>${field.label}:</strong> ${value}</div>`;
+                }
+            });
+            
+            // Add any remaining Nexus1 fields (excluding image, id, isBrand, and already processed)
+            const processedKeys = new Set(['owner_name', 'reg_no', 'maker', 'maker_modal', 'vh_class', 'regn_dt', 'insUpto', 'image', 'id', 'isBrand', 'error', 'vehicle_no']);
+            for (const key in nexus1) {
+                if (nexus1.hasOwnProperty(key) && !processedKeys.has(key) && nexus1[key] !== null && nexus1[key] !== undefined && nexus1[key] !== '') {
                     const label = key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-                    otherHtml += `<div class="sv-result-item"><strong>${label}:</strong> ${data[key]}</div>`;
+                    otherHtml += `<div class="sv-result-item"><strong>${label}:</strong> ${nexus1[key]}</div>`;
                     processedKeys.add(key);
+                }
+            }
+            
+            // Add any remaining Nexus2 fields (excluding already processed and null)
+            const processedNexus2Keys = new Set(['Owner Name', 'Father\'s Name', 'Model Name', 'Vehicle Class', 'Fuel Type', 'Registration Date', 'Insurance Expiry', 'Registered RTO', 'Address', 'City Name']);
+            for (const key in nexus2) {
+                if (nexus2.hasOwnProperty(key) && !processedNexus2Keys.has(key) && nexus2[key] !== null && nexus2[key] !== undefined && nexus2[key] !== '') {
+                    const label = key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                    otherHtml += `<div class="sv-result-item"><strong>${label}:</strong> ${nexus2[key]}</div>`;
+                    processedNexus2Keys.add(key);
                 }
             }
             
@@ -352,9 +376,8 @@
             
             let message = error.message;
 
-            // This specific error often indicates a CORS issue (security policy preventing fetch)
             if (message.includes('Failed to fetch')) {
-                message = "The request failed to reach the server. This is often caused by a **CORS policy** restricting access. If the issue persists, the API owner will need to adjust their server settings, or you may need to route the request through a server-side proxy.";
+                message = "The request failed to reach the server. This is often caused by a CORS policy restricting access. If the issue persists, the API owner will need to adjust their server settings, or you may need to route the request through a server-side proxy.";
             }
 
             errorMessage.textContent = `Vehicle Data Lookup Failed: ${message}`;
@@ -362,5 +385,7 @@
         });
     });
   </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+  <script src="js/frontend-script.js" defer></script>
 </body>
 </html>
