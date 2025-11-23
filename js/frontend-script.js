@@ -56,22 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
       setMenuState(shouldOpen);
     });
 
+    // --- FIX APPLIED HERE ---
     navLinks.forEach((link) => {
       link.addEventListener('click', (event) => {
         if (!isMobile()) return;
-
-        const href = link.getAttribute('href');
-        const shouldHandle = href && !href.startsWith('#') && !href.startsWith('javascript:');
-
-        if (shouldHandle) {
-          event.preventDefault();
-          closeMenu();
-          setTimeout(() => {
-            window.location.href = href;
-          }, 120); // give the menu time to animate closed
-        } else {
-          closeMenu();
-        }
+        // Simply close the menu and let the browser handle the link naturally.
+        // We removed event.preventDefault() and the setTimeout.
+        closeMenu();
       });
     });
 
