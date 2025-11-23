@@ -61,25 +61,37 @@ document.addEventListener('DOMContentLoaded', function() {
       setMenuState(shouldOpen);
     });
 
-    // --- NEW NAVIGATION LOGIC (The Fix) ---
+    // --- FIXED NAVIGATION LOGIC ---
     navLinks.forEach((link) => {
       link.addEventListener('click', (event) => {
         if (!isMobile()) return;
 
         const href = link.getAttribute('href');
+        const target = link.getAttribute('target');
 
-        // SCENARIO 1: Anchor Links (e.g., "#benefits")
-        // These don't reload the page, so we MUST close the menu manually.
-        if (href && href.startsWith('#')) {
-          closeMenu(); 
+        // If link opens in new tab, close menu and let browser handle it
+        if (target === '_blank') {
+            closeMenu();
+            return;
         }
 
-        // SCENARIO 2: Real Page Links (e.g., "about.html", "contact.html")
-        // We do NOTHING. We do NOT preventDefault. We do NOT close the menu.
-        // We let the browser handle the click 100% naturally.
-        // The menu will disappear when the new page loads.
+        // Prevent default to stop any conflicts
+        event.preventDefault();
+        
+        // 1. CLOSE THE MENU INSTANTLY
+        closeMenu();
+
+        // 2. GO TO THE PAGE MANUALLY (After 300ms)
+        // This slight delay allows the menu close animation to be seen,
+        // but the menu will effectively be "gone" from view immediately.
+        if (href && href !== '#') {
+          setTimeout(() => {
+            window.location.href = href;
+          }, 300); 
+        }
       });
     });
+    // -----------------------------
 
     // Close on backdrop click
     backdrop.addEventListener('click', closeMenu, { passive: true });
