@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SV Enterprises | Vehicle RTO Lookup</title>
+  <meta name="description" content="Instantly check vehicle details, including owner name, by entering the license plate number.">
+  <link rel="icon" type="image/png" href="images/sv-logo-icon.png">
+  <link rel="stylesheet" href="css/sv-custom.css">
+  <style>
+    .sv-form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .sv-form-control {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(15, 30, 30, 0.12);
+      border-radius: var(--sv-radius-md);
+      font-size: 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .sv-form-control:focus {
+      outline: none;
+      border-color: var(--sv-indigo);
+      box-shadow: 0 0 0 3px rgba(36, 180, 179, 0.2);
+    }
+
+    .sv-lookup-result {
+      margin-top: 2rem;
+      padding: 1.8rem;
+      border: 1px solid rgba(36, 180, 179, 0.2);
+      border-radius: var(--sv-radius-lg);
+      background-color: var(--sv-card);
+      box-shadow: 0 18px 34px rgba(7, 48, 55, 0.12);
+    }
+
+    .sv-result-title {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--sv-indigo-dark);
+      border-bottom: 2px solid rgba(36, 180, 179, 0.2);
+      padding-bottom: 0.5rem;
+    }
+
+    .sv-result-item {
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed rgba(15, 30, 30, 0.12);
+    }
+
+    .sv-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .sv-result-item strong {
+      display: inline-block;
+      min-width: 150px;
+      font-weight: 600;
+      color: var(--sv-midnight);
+    }
+
+    .sv-error {
+      color: #e43d40;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="sv-page">
+  <div class="sv-topbar">
+    <div class="sv-container sv-topbar__inner">
+      <span>Hi, welcome to SV Enterprises.</span>
+    </div>
+  </div>
+
+  <header class="sv-header">
+    <div class="sv-container sv-header__inner">
+      <a class="sv-header__brand" href="index.html">
+        <img src="images/sv-logo-icon.png" alt="SV Enterprises Logo">
+        <span class="sv-header__brand-text">SV Enterprises</span>
+      </a>
+      <button class="sv-header__menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sv-primary-navigation">
+        <span class="sv-header__menu-icon"></span>
+      </button>
+      <nav class="sv-header__nav" id="sv-primary-navigation" aria-label="Primary">
+        <ul class="sv-header__nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="benefits.html">Benefits</a></li>
+          <li><a href="claims.html">Claims</a></li>
+          <li><a class="is-active" href="rto-check.html" aria-current="page">RTO Check</a></li>
+          <li><a href="contact-us.html">Contact</a></li>
+        </ul>
+        <div class="sv-header__cta">
+          <a class="sv-btn sv-btn--ghost" href="mailto:Vijaysvinsurance1@gmail.com">Email Us</a>
+          <a class="sv-btn sv-btn--primary" href="tel:+919380858219">Call 93808 58219</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="sv-section">
+      <div class="sv-container">
+        <div class="sv-hero sv-hero--rto-match">
+          <div class="sv-hero__content sv-fade-up">
+            <span class="sv-pill">Quick Vehicle Check</span>
+            <h1 class="sv-hero__title">Instantly check vehicle RTO details</h1>
+            <p class="sv-hero__text">Enter any Indian vehicle registration number to retrieve ownership and registration information within seconds.</p>
+            <div class="sv-hero__actions">
+              <a class="sv-btn sv-btn--primary" href="#lookup">Start lookup</a>
+              <a class="sv-btn sv-btn--ghost" href="#faq">View FAQ</a>
+            </div>
+            <div class="sv-hero__quick-links">
+              <a class="sv-quick-card" href="#lookup"><span>Lookup</span><strong>Enter registration number</strong></a>
+              <a class="sv-quick-card" href="#results"><span>Results</span><strong>See decoded vehicle data</strong></a>
+              <a class="sv-quick-card" href="#faq"><span>Help</span><strong>Know what information means</strong></a>
+            </div>
+          </div>
+          <aside class="sv-hero__panel sv-fade-up">
+            <h3>Need assistance?</h3>
+            <p>Our team can help interpret results, verify ownership, or start insurance paperwork based on lookups.</p>
+            <ul>
+              <li><span>📞</span><div><strong><a href="tel:+919380858219">+91 93808 58219</a></strong><br>Talk to an advisor now</div></li>
+              <li><span>✉</span><div><strong><a href="mailto:Vijaysvinsurance1@gmail.com">Email our desk</a></strong><br>Attach your lookup results</div></li>
+              <li><span>🕑</span><div><strong>9:30 AM – 7:00 PM</strong><br>Support from Rajajinagar office</div></li>
+            </ul>
+            <div class="sv-panel-actions">
+              <a class="sv-btn sv-btn--primary" href="https://wa.me/919380858219" target="_blank" rel="noopener">WhatsApp us</a>
+              <a class="sv-btn sv-btn--ghost" href="contact-us.html">Visit contact page</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="sv-section sv-section--compact" id="lookup">
+      <div class="sv-container">
+        <div class="sv-hero_content sv-hero_content--center sv-fade-up">
+          <h2 class="sv-title">Vehicle registration number lookup</h2>
+          <p class="sv-subtitle">Enter the registration number (e.g., KA01AB1234) to fetch registration, insurance, and vehicle metadata from public records.</p>
+        </div>
+
+        <div class="sv-grid-2">
+          <div>
+            <form id="vehicleLookupForm" class="sv-card sv-fade-up">
+              <div class="sv-form-group">
+                <label for="vehicle_no">Vehicle Registration Number</label>
+                <input type="text" id="vehicle_no" name="vehicle_no" class="sv-form-control" placeholder="e.g., KA01AB1234" required>
+              </div>
+              <button type="submit" class="sv-btn sv-btn--primary">Search details</button>
+              <p id="loadingMessage" style="display:none; margin-top: 1rem;">Loading vehicle data... Please wait.</p>
+              <p id="errorMessage" class="sv-error" style="display:none; margin-top: 1rem;"></p>
+            </form>
+          </div>
+
+          <div id="results" class="sv-fade-up">
+            <div id="resultsContainer" class="sv-lookup-result" style="display:none;">
+              <h3 class="sv-result-title">Vehicle details</h3>
+              <div id="ownerNameDisplay" class="sv-result-item"></div>
+              <div id="otherInfoDisplay"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sv-section sv-section--alt" id="faq">
+      <div class="sv-container sv-grid-2">
+        <div class="sv-card sv-fade-up">
+          <h3 class="sv-card__title">What information is provided?</h3>
+          <p class="sv-card__text">The lookup returns owner name (where available), registration status, insurance validity, fitness details, and more based on public RTO data.</p>
+        </div>
+        <div class="sv-card sv-fade-up">
+          <h3 class="sv-card__title">When should I contact SV?</h3>
+          <p class="sv-card__text">If you need help deciphering the results, want to update insurance, or require ownership transfer assistance, reach our advisors anytime.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="sv-footer">
+    <div class="sv-container">
+      <div class="sv-footer__top">
+        <div>
+          <div class="sv-footer__brand">SV Enterprises</div>
+          <p>Motor &amp; Vehicle Insurance Specialists safeguarding ambitions across Karnataka with agile advisory and claims excellence.</p>
+          <div class="sv-social">
+            <a href="https://share.google/YKUy2WqT9sCqnjYEH" target="_blank" rel="noopener noreferrer" aria-label="Google">
+              <img src="images/social/google.png" alt="Google" width="32" height="32">
+            </a>
+            <a href="https://www.instagram.com/svinsurance1?igsh=czVycGl0NnBtaHhu" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <img src="images/social/instagram.png" alt="Instagram" width="32" height="32">
+            </a>
+            <a href="https://www.facebook.com/share/14QaaX6EZTw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <img src="images/social/facebook.png" alt="Facebook" width="32" height="32">
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul class="sv-footer__list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="benefits.html">Benefits</a></li>
+            <li><a href="claims.html">Claims</a></li>
+            <li><a href="rto-check.html">RTO Check</a></li>
+            <li><a href="contact-us.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul class="sv-footer__list">
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul class="sv-footer__list">
+            <li>SV Enterprises</li>
+            <li>Rajajinagar, Bangalore</li>
+            <li><a href="tel:+919380858219">+91 93808 58219</a> / <a href="tel:+7411812788">74118 12788</a></li>
+            <li><a href="mailto:Vijaysvinsurance1@gmail.com">Vijaysvinsurance1@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sv-footer__bottom">
+        ©️ 2025 SV Enterprises. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('vehicleLookupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const vehicleNoInput = document.getElementById('vehicle_no');
+      const resultsContainer = document.getElementById('resultsContainer');
+      const ownerNameDisplay = document.getElementById('ownerNameDisplay');
+      const otherInfoDisplay = document.getElementById('otherInfoDisplay');
+      const loadingMessage = document.getElementById('loadingMessage');
+      const errorMessage = document.getElementById('errorMessage');
+
+      // Get the vehicle number, convert to lowercase, trim, and safely URL-encode it
+      const rawVehicleNo = vehicleNoInput.value.trim().toUpperCase();
+      const encodedVehicleNo = encodeURIComponent(rawVehicleNo);
+      
+      // -- NEW API ENDPOINT --
+      const apiEndpoint = https://vehicle.rahulrk98503.workers.dev/?vehicle=${encodedVehicleNo};
+
+      // Reset previous states and show loading
+      resultsContainer.style.display = 'none';
+      errorMessage.style.display = 'none';
+      ownerNameDisplay.innerHTML = '';
+      otherInfoDisplay.innerHTML = '';
+      loadingMessage.style.display = 'block';
+      vehicleNoInput.setAttribute('disabled', 'true');
+      document.querySelector('button[type="submit"]').setAttribute('disabled', 'true');
+
+      fetch(apiEndpoint)
+        .then(response => {
+          if (!response.ok) {
+            loadingMessage.style.display = 'none';
+            vehicleNoInput.removeAttribute('disabled');
+            document.querySelector('button[type="submit"]').removeAttribute('disabled');
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(apiResponse => {
+            loadingMessage.style.display = 'none';
+            vehicleNoInput.removeAttribute('disabled');
+            document.querySelector('button[type="submit"]').removeAttribute('disabled');
+            
+            // Handle if the API wraps data in a 'data' key or returns it directly
+            // Based on your demo response, it looks like a flat object, but we check both.
+            let data = apiResponse;
+            if (apiResponse.data) {
+                data = apiResponse.data;
+            }
+
+            // Check if we actually got valid data (check for a key like reg_no or owner_name)
+            if (!data || (!data.registration_no && !data.owner_name)) {
+                errorMessage.textContent = 'Error: No details found for this vehicle number.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // --- 1. DISPLAY OWNER NAME (PRIORITY) ---
+            const ownerName = data.owner_name || 'N/A';
+            ownerNameDisplay.innerHTML = `<strong>Vehicle Owner:</strong> <span style="font-size: 1.2em; color: var(--sv-indigo-dark); text-transform: uppercase;">${ownerName}</span>`;
+            
+            // --- 2. MAP OTHER FIELDS (Based on your demo response) ---
+            const fieldsToDisplay = [
+                { key: 'registration_no', label: 'Registration No' },
+                { key: 'maker_model', label: 'Model' },
+                { key: 'vehicle_class', label: 'Vehicle Class' },
+                { key: 'fuel_type', label: 'Fuel Type' },
+                { key: 'registration_date', label: 'Registration Date' },
+                { key: 'insurance_upto', label: 'Insurance Valid Upto' },
+                { key: 'rc_status', label: 'RC Status' },
+                { key: 'registration_authority', label: 'RTO' },
+                { key: 'engine_no', label: 'Engine No' },
+                { key: 'chassis_no', label: 'Chassis No' }
+            ];
+
+            let otherHtml = '';
+
+            fieldsToDisplay.forEach(field => {
+                const value = data[field.key];
+                // Only display if value exists and isn't empty
+                if (value && value !== 'null' && value !== '') {
+                    otherHtml += `<div class="sv-result-item"><strong>${field.label}:</strong> ${value}</div>`;
+                }
+            });
+            
+            otherInfoDisplay.innerHTML = otherHtml;
+            resultsContainer.style.display = 'block';
+
+        })
+        .catch(error => {
+            loadingMessage.style.display = 'none';
+            vehicleNoInput.removeAttribute('disabled');
+            document.querySelector('button[type="submit"]').removeAttribute('disabled');
+            console.error('Lookup failed:', error);
+            
+            let message = error.message;
+            if (message.includes('Failed to fetch')) {
+                message = "Unable to connect to the server. Please check your internet connection.";
+            }
+
+            errorMessage.textContent = `Vehicle Data Lookup Failed: ${message}`;
+            errorMessage.style.display = 'block';
+        });
+    });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+  <script src="js/frontend-script.js" defer></script>
+</body>
+</html>
