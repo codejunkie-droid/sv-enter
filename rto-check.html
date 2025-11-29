@@ -63,6 +63,10 @@
     .sv-error {
       color: #e43d40;
       font-weight: 600;
+      background: rgba(228, 61, 64, 0.1);
+      padding: 1rem;
+      border-radius: var(--sv-radius-sm);
+      border: 1px solid rgba(228, 61, 64, 0.2);
     }
   </style>
 </head>
@@ -248,8 +252,8 @@
       const rawVehicleNo = vehicleNoInput.value.trim().toUpperCase();
       const encodedVehicleNo = encodeURIComponent(rawVehicleNo);
       
-      // -- NEW API ENDPOINT --
-      const apiEndpoint = https://vehicle.rahulrk98503.workers.dev/?vehicle=${encodedVehicleNo};
+      // -- NEW API ENDPOINT (Updated to vehicle_no) --
+      const apiEndpoint = `https://vehicle.rahulrk98503.workers.dev/?vehicle_no=${encodedVehicleNo}`;
 
       // Reset previous states and show loading
       resultsContainer.style.display = 'none';
@@ -276,15 +280,14 @@
             document.querySelector('button[type="submit"]').removeAttribute('disabled');
             
             // Handle if the API wraps data in a 'data' key or returns it directly
-            // Based on your demo response, it looks like a flat object, but we check both.
             let data = apiResponse;
             if (apiResponse.data) {
                 data = apiResponse.data;
             }
 
-            // Check if we actually got valid data (check for a key like reg_no or owner_name)
+            // Check if we actually got valid data (check for a key like registration_no or owner_name)
             if (!data || (!data.registration_no && !data.owner_name)) {
-                errorMessage.textContent = 'Error: No details found for this vehicle number.';
+                errorMessage.textContent = 'No records found for this vehicle number. Please verify the number and try again.';
                 errorMessage.style.display = 'block';
                 return;
             }
@@ -293,7 +296,7 @@
             const ownerName = data.owner_name || 'N/A';
             ownerNameDisplay.innerHTML = `<strong>Vehicle Owner:</strong> <span style="font-size: 1.2em; color: var(--sv-indigo-dark); text-transform: uppercase;">${ownerName}</span>`;
             
-            // --- 2. MAP OTHER FIELDS (Based on your demo response) ---
+            // --- 2. MAP OTHER FIELDS ---
             const fieldsToDisplay = [
                 { key: 'registration_no', label: 'Registration No' },
                 { key: 'maker_model', label: 'Model' },
@@ -328,11 +331,13 @@
             console.error('Lookup failed:', error);
             
             let message = error.message;
+            
+            // Improved Error Handling for Debugging
             if (message.includes('Failed to fetch')) {
-                message = "Unable to connect to the server. Please check your internet connection.";
+                message = "Connection failed. The API server may be blocking the request (CORS policy) or is offline.";
             }
 
-            errorMessage.textContent = `Vehicle Data Lookup Failed: ${message}`;
+            errorMessage.textContent = `Error: ${message}`;
             errorMessage.style.display = 'block';
         });
     });
